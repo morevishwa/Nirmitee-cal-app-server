@@ -10,10 +10,6 @@ app.use(express.json());
 
 const MONGO_URL = process.env.MONGO_URL;
 
-
-// API Endpoints
-
-// Get all appointments
 app.get("/appointments", async (req, res) => {
   const appointments = await Appointment.find({});
   res.json(appointments);
@@ -21,8 +17,6 @@ app.get("/appointments", async (req, res) => {
 
 // Add a new appointment
 app.post("/appointments", async (req, res) => {
-
-
   const appointment = new Appointment(req.body);
   await appointment.save();
   res.status(201).json(appointment);
