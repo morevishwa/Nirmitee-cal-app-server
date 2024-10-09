@@ -2,12 +2,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Appointment = require("./models/Appointment");
+require('dotenv').config()
 const cors = require("cors");
-
 const app = express();
 app.use(cors());
 app.use(express.json());
-const MONGO_URL = `mongodb+srv://VISHWA:VISWA@mycluster.sdujrrv.mongodb.net/appointmentDB?retryWrites=true&w=majority&appName=myCluster`;
+
+const MONGO_URL = process.env.MONGO_URL;
 
 
 // API Endpoints
@@ -20,7 +21,7 @@ app.get("/appointments", async (req, res) => {
 
 // Add a new appointment
 app.post("/appointments", async (req, res) => {
-  
+
 
   const appointment = new Appointment(req.body);
   await appointment.save();
